@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov  7 00:59:50 2019
-
-@author: Vaibhav
-"""
 #importing
 import pandas as pd
 import numpy as np
@@ -14,7 +8,7 @@ from sklearn.model_selection import GridSearchCV
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
 
-
+#Cleaning
 data = pd.read_csv('E:\Dataset credit card\development_dataset.csv')
 data.info()
 data.head()
@@ -32,6 +26,7 @@ data['VAR14'] = data['VAR14'].convert_objects(convert_numeric=True)
 X = data.drop(columns = 'VAR21')
 y = data["VAR21"]
 
+#Encoder for y variable
 enc =LabelEncoder()
 y = enc.fit_transform(y)
 
@@ -39,6 +34,7 @@ y = enc.fit_transform(y)
 sm = SMOTE()
 resampled_X, resampled_y = sm.fit_resample(X, y)
 
+#splitting to train and test dataset
 X_train, X_test, y_train, y_test = train_test_split(resampled_X, resampled_y, test_size = 0.2)
 
 
